@@ -64,6 +64,13 @@ public class ApiController {
         return new ResponseEntity(dto, HttpStatus.OK);
     }
 
+    @PutMapping("/lugar/{id}")
+    public ResponseEntity<LugarRequestDTO> updateLugar(@PathVariable String id, @RequestBody LugarRequestDTO lugarDetails) {
+        LugarEntity data = MapperUtil.map(lugarDetails,LugarEntity.class);
+        controllerBusiness.updateDataLugar(id, data);
+        return new ResponseEntity(lugarDetails, HttpStatus.OK);
+    }
+
 	@ApiOperation(value = "Obtener lista de Registro", notes = "Retorna listado de Registro del sistema xxxxx")
 	@GetMapping("registro")
     public List<RegistroResponseDTO> getRegistro() {

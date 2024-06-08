@@ -13,6 +13,6 @@ public class LugarRequestDTO {
     private String nombre;
 	
     @ApiModelProperty(value = "Data Exmaple for LugarRequestDTO", required = true, example = "15")
-    private int capaciadad;
+    private int capacidad;
 	
 }

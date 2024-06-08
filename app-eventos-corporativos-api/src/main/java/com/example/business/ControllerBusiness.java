@@ -13,6 +13,7 @@ import com.example.util.LoggerUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Component
 public class ControllerBusiness {
 
@@ -44,6 +45,16 @@ public class ControllerBusiness {
 		lugarRepository.findAll().forEach((final LugarEntity r) -> result.add(r));
 		return result;
 	}
+
+	public LugarEntity updateDataLugar(String id, LugarEntity lugarDetails) {
+		LugarEntity lugar = lugarRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Lugar no encontrado"));
+
+		lugar.setNombre(lugarDetails.getNombre());
+		lugar.setCapacidad(lugarDetails.getCapacidad());
+
+		return lugarRepository.save(lugar);
+	}
    
 	@Autowired
     RegistroRepository registroRepository;
@@ -57,5 +68,9 @@ public class ControllerBusiness {
 		registroRepository.findAll().forEach((final RegistroEntity r) -> result.add(r));
 		return result;
 	}
+
+
+
+
 
 }

@@ -29,5 +29,5 @@ public class LugarEntity  implements Serializable {
     private String id;
 
     private String nombre;
-    private int capaciadad;
+    private int capacidad;
 }
