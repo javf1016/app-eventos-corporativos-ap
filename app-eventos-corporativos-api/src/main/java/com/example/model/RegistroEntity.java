@@ -1,11 +1,7 @@
 package com.example.model;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -31,4 +27,13 @@ public class RegistroEntity  implements Serializable {
     private String nombres;
     private String apellidos;
     private Date fecha;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "evento_id", nullable = false)
+    private EventoEntity evento;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lugar_id", nullable = false)
+    private LugarEntity lugar;
+
 }

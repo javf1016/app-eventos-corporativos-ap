@@ -13,6 +13,7 @@ import com.example.business.ControllerBusiness;
 import com.example.dto.*;
 import com.example.model.*;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @ApiResponses(value = {
@@ -78,18 +79,18 @@ public class ApiController {
     }
 
 	@PostMapping("registro")
-    public ResponseEntity<RegistroRequestDTO> putRegistro(@RequestBody RegistroRequestDTO dto) {
-		
+    public ResponseEntity<RegistroRequestDTO> putRegistro(@RequestBody RegistroRequestDTO dto, @RequestParam String eventoId, @RequestParam String lugarId) {
+
 		RegistroEntity data = MapperUtil.map(dto,RegistroEntity.class);
-	    controllerBusiness.addDataRegistro(data);
+	    controllerBusiness.addDataRegistro(data, eventoId, lugarId);
         return new ResponseEntity(dto, HttpStatus.OK);
     }
 
-
-
-
-
-
+    @PostMapping("/evento/{eventoId}/lugar")
+    public ResponseEntity<EventoEntity> addLugaresToEvento(@PathVariable String eventoId, @RequestBody Set<String> lugarIds) {
+        EventoEntity updatedEvento = controllerBusiness.addLugaresToEvento(eventoId, lugarIds);
+        return new ResponseEntity<>(updatedEvento, HttpStatus.OK);
+    }
 
 
 }

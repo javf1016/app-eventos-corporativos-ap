@@ -1,11 +1,7 @@
 package com.example.model;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -32,4 +29,11 @@ public class EventoEntity  implements Serializable {
     private Date fecha;
     private String descripcion;
     private boolean estado;
+    @ManyToMany
+    @JoinTable(
+            name = "evento_lugar",
+            joinColumns = @JoinColumn(name = "evento_id"),
+            inverseJoinColumns = @JoinColumn(name = "lugar_id")
+    )
+    private Set<LugarEntity> lugares;
 }
