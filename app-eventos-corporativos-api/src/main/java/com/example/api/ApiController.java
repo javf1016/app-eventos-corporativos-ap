@@ -23,8 +23,12 @@ import java.util.Set;
 @Api(value = "app-eventos-corporativos-api ApiController", description = "Eventos Corporativos es un app que se encarga de verificar diponilibades de lugares y permitir la creación de eventos en ellos. Adicional debe permiitr el registro de personas al evento",  tags = {"",""})
 public class ApiController {
 
+    private final ControllerBusiness controllerBusiness;
+
     @Autowired
-    ControllerBusiness controllerBusiness;
+    public ApiController(ControllerBusiness controllerBusiness) {
+        this.controllerBusiness = controllerBusiness;
+    }
 
 	@Value("${spring.application.version}")
 	private String version;

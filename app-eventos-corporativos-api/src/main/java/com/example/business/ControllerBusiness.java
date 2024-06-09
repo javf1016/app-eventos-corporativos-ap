@@ -1,16 +1,12 @@
 package com.example.business;
  
 import com.example.repository.*;
-import com.example.dto.*;
 import com.example.model.*;
 
 
 import com.example.util.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import com.example.util.GSonUtils;
 import com.example.util.LoggerUtil;
 
 import java.util.ArrayList;
@@ -23,47 +19,50 @@ import java.util.stream.StreamSupport;
 @Component
 public class ControllerBusiness {
 
-	@Autowired
-	LoggerUtil log;
+	private final LoggerUtil log;
+    private final EventoRepository eventoRepository;
+	private final LugarRepository lugarRepository;
+	private final RegistroRepository registroRepository;
 
 	@Autowired
-    EventoRepository eventoRepository;
+	public ControllerBusiness(LoggerUtil log, EventoRepository eventoRepository, LugarRepository lugarRepository, RegistroRepository registroRepository) {
+		this.log = log;
+		this.eventoRepository = eventoRepository;
+		this.lugarRepository = lugarRepository;
+		this.registroRepository = registroRepository;
+	}
+
 
 	public void addDataEvento(EventoEntity data) {
 		eventoRepository.save(data);
 	}
 
 	public List<EventoEntity> getDataEvento() {
-		List<EventoEntity> result = new ArrayList<EventoEntity>();
+		List<EventoEntity> result = new ArrayList<>();
 		eventoRepository.findAll().forEach((final EventoEntity r) -> result.add(r));
 		return result;
 	}
-   
-	@Autowired
-    LugarRepository lugarRepository;
 
 	public void addDataLugar(LugarEntity data) {
 		lugarRepository.save(data);
 	}
 
 	public List<LugarEntity> getDataLugar() {
-		List<LugarEntity> result = new ArrayList<LugarEntity>();
-		lugarRepository.findAll().forEach((final LugarEntity r) -> result.add(r));
-		return result;
+		List<LugarEntity> result = new ArrayList<>();
+        for (LugarEntity r : lugarRepository.findAll()) {
+            result.add(r);
+        }
+        return result;
 	}
 
-	public LugarEntity updateDataLugar(String id, LugarEntity lugarDetails) {
+	public void updateDataLugar(String id, LugarEntity lugarDetails) {
 		LugarEntity lugar = lugarRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Lugar no encontrado"));
 
 		lugar.setNombre(lugarDetails.getNombre());
 		lugar.setCapacidad(lugarDetails.getCapacidad());
-
-		return lugarRepository.save(lugar);
+		lugarRepository.save(lugar);
 	}
-   
-	@Autowired
-    RegistroRepository registroRepository;
 
 	public void addDataRegistro(RegistroEntity data, String eventoId, String lugarId) {
 		// Obtener el evento y el lugar de la base de datos
@@ -93,7 +92,7 @@ public class ControllerBusiness {
 	}
 
 	public List<RegistroEntity> getDataRegistro() {
-		List<RegistroEntity> result = new ArrayList<RegistroEntity>();
+		List<RegistroEntity> result = new ArrayList<>();
 		registroRepository.findAll().forEach((final RegistroEntity r) -> result.add(r));
 		return result;
 	}
