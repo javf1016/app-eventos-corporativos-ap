@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "5599571d-1c54-4b27-894b-cb69a680fecb",
+		"name": "Eventos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createLugar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Sala de Conferencias E\",\r\n  \"capacidad\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1.0/lugar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1.0",
+						"lugar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenerLugares",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/v1.0/lugar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1.0",
+						"lugar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizarLugar",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Sala de Conferencias Grande\",\r\n  \"capacidad\": 150\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1.0/lugar/980c3275-e1b0-4eb8-ba10-eb5683699bc3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1.0",
+						"lugar",
+						"980c3275-e1b0-4eb8-ba10-eb5683699bc3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearEvento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Conferencia Anual\",\r\n  \"fecha\": \"2024-06-08T10:00:00Z\",\r\n  \"descripcion\": \"Una conferencia sobre innovación tecnológica\",\r\n  \"estado\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1.0/evento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1.0",
+						"evento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenerEventos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/v1.0/evento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1.0",
+						"evento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddLugarEvento",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    \"ab20d405-cc8e-4960-8ec8-7d617e438c85\",\r\n    \"e290f816-5f1f-417a-b54e-70d0476e3043\",\r\n    \"10f2351c-8629-4077-adb5-96c968bf444d\"\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1.0/evento/3d9d1781-be69-4679-8339-3c3b726c5368/lugar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1.0",
+						"evento",
+						"3d9d1781-be69-4679-8339-3c3b726c5368",
+						"lugar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearRegistro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombres\": \"Juan\",\r\n    \"apellidos\": \"Pérez\",\r\n    \"fecha\": \"2024-06-08\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1.0/registro?eventoId=3d9d1781-be69-4679-8339-3c3b726c5368&lugarId=10f2351c-8629-4077-adb5-96c968bf444d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1.0",
+						"registro"
+					],
+					"query": [
+						{
+							"key": "eventoId",
+							"value": "3d9d1781-be69-4679-8339-3c3b726c5368"
+						},
+						{
+							"key": "lugarId",
+							"value": "10f2351c-8629-4077-adb5-96c968bf444d"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
